@@ -12,80 +12,182 @@
             <li><a href="./../Subsistemas/inventario_puerco.html">Inventario de Puercos</a></li>
         </ul>
     </nav>
-
-    <img src="./../imagenes/Diagrama de DB.png" alt="Diagrama de Inventario de Puercos"width="600">
-
     <H1>Diseño de la base de datos del subsistema</H1>
 
-    <p>
-        La base de datos se compone de varias tablas que representan las entidades clave en la gestión del 
-        inventario de cerdos. Estas tablas son:
-    </p>
-    <ul>
-        <li>Razas</li>
-        <li>EtapasCrecimiento</li>
-        <li>Cerdos</li>
-        <li>TiposOperacion</li>
-        <li>MovimientosInventario</li>
-        <li>TiposReporte</li>
-        <li>Reportes</li>
-    </ul>
+    <img src="./../imagenes/Base de datos.png" alt="Diagrama de Inventario de Puercos"width="600">
 
-    <h2>Tablas y Campos</h2>
+    <h2>Descripción de la Arquitectura de la Base de Datos</h2>
     <p>
-        <strong>Razas:</strong> Esta tabla contiene información sobre las razas de los cerdos. Los campos 
-        permiten registrar el nombre de la raza, lo que es esencial para clasificar y gestionar la diversidad genética en el inventario.
-    </p>
-    <p>
-        <strong>EtapasCrecimiento:</strong> Almacena las diferentes etapas de crecimiento de los cerdos,
-         incluyendo un nombre y descripción. Esto es crucial para entender las necesidades y características 
-         de los cerdos en cada fase de su vida.
-    </p>
-    <p>
-        <strong>Cerdos:</strong> La tabla principal que registra la información individual de cada cerdo, 
-        incluyendo su peso, fecha de nacimiento, raza y etapa de crecimiento. Las relaciones con las tablas de Razas y
-         EtapasCrecimiento aseguran una integridad referencial, permitiendo un seguimiento adecuado de cada animal.
-    </p>
-    <p>
-        <strong>TiposOperacion:</strong> Esta tabla define los diferentes tipos de operaciones que pueden realizarse 
-        en el inventario, como entradas y salidas. Esto facilita la categorización y gestión de los movimientos de los cerdos.
-    </p>
-    <p>
-        <strong>MovimientosInventario:</strong> Registra cada movimiento de los cerdos, incluyendo la fecha y tipo de 
-        operación. Este seguimiento es vital para mantener un control preciso del inventario y para la toma de decisiones operativas.
-    </p>
-    <p>
-        <strong>TiposReporte:</strong> Almacena los diferentes tipos de reportes que se pueden generar, permitiendo una 
-        fácil clasificación y generación de informes sobre el estado del inventario.
-    </p>
-    <p>
-        <strong>Reportes:</strong> Esta tabla vincula reportes específicos a cerdos individuales, permitiendo un análisis 
-        detallado de cada animal y su rendimiento.
+        La base de datos del sistema se compone de cinco tablas principales, 
+        diseñadas para almacenar información relacionada y garantizar la integridad de los datos.
     </p>
 
-    <h2>Relaciones</h2>
-    <p>
-        Las relaciones entre las tablas son fundamentales para mantener la integridad de los datos:
-    </p>
+    <h2> Tabla: Cerdos</h2>
+    <p><strong>Descripción:</strong> Almacena información detallada sobre cada cerdo en el inventario.</p>
     <ul>
-        <li><strong>Razas y Cerdos:</strong> Se establece una relación de uno a muchos, donde cada raza puede estar asociada a múltiples cerdos.</li>
-        <li><strong>EtapasCrecimiento y Cerdos:</strong> Similarmente, cada cerdo está vinculado a una etapa de crecimiento específica, lo que permite un seguimiento adecuado del desarrollo del animal.</li>
-        <li><strong>Cerdos y MovimientosInventario:</strong> Cada movimiento registrado en el inventario se asocia con un cerdo específico, garantizando un control exhaustivo de los cambios en el inventario.</li>
-        <li><strong>TiposOperacion y MovimientosInventario:</strong> Los movimientos se clasifican por tipo de operación, lo que permite una gestión más organizada.</li>
-        <li><strong>Cerdos y Reportes:</strong> Cada reporte está vinculado a un cerdo, facilitando un análisis detallado del rendimiento y estado de cada animal.</li>
+        <li><strong>CerdoID:</strong> Identificador único para cada cerdo (clave primaria).</li>
+        <li><strong>Raza:</strong> Nombre de la raza del cerdo.</li>
+        <li><strong>Peso:</strong> Peso actual del cerdo.</li>
+        <li><strong>FechaNacimiento:</strong> Fecha de nacimiento del cerdo.</li>
+        <li><strong>EtapaCrecimiento:</strong> Etapa actual (Lechón, Crecimiento, Engorde, Adulto).</li>
+        <li><strong>Estado:</strong> Estado general del cerdo (Saludable, Enfermo, etc.).</li>
     </ul>
+
+    <h2> Tabla: TiposOperacion</h2>
+    <p><strong>Descripción:</strong> Define los diferentes tipos de operaciones que se realizan sobre los cerdos.</p>
+    <ul>
+        <li><strong>TipoOperacionID:</strong> Identificador único (clave primaria).</li>
+        <li><strong>Nombre:</strong> Descripción del tipo de operación (Ingreso, Salida, etc.).</li>
+    </ul>
+
+    <h2> Tabla: MovimientosInventario</h2>
+    <p><strong>Descripción:</strong> Registra todas las transacciones relacionadas con los cerdos.</p>
+    <ul>
+        <li><strong>MovimientoID:</strong> Identificador único (clave primaria).</li>
+        <li><strong>CerdoID:</strong> Identificador del cerdo asociado (clave foránea).</li>
+        <li><strong>FechaHora:</strong> Fecha y hora del movimiento.</li>
+        <li><strong>TipoOperacionID:</strong> Tipo de operación (clave foránea).</li>
+        <li><strong>CantidadAfectada:</strong> Cantidad de cerdos involucrados.</li>
+        <li><strong>Descripcion:</strong> Detalles adicionales sobre el movimiento.</li>
+    </ul>
+
+    <h2> Tabla: TiposReporte</h2>
+    <p><strong>Descripción:</strong> Define los diferentes tipos de reportes generables.</p>
+    <ul>
+        <li><strong>TipoReporteID:</strong> Identificador único (clave primaria).</li>
+        <li><strong>Nombre:</strong> Nombre del tipo de reporte.</li>
+        <li><strong>Descripcion:</strong> Descripción del contenido del reporte.</li>
+    </ul>
+
+    <h2> Tabla: Reportes</h2>
+    <p><strong>Descripción:</strong> Almacena informes sobre los cerdos y sus operaciones.</p>
+    <ul>
+        <li><strong>ReporteID:</strong> Identificador único (clave primaria).</li>
+        <li><strong>CerdoID:</strong> Identificador del cerdo asociado (clave foránea).</li>
+        <li><strong>FechaGeneracion:</strong> Fecha en que se generó el reporte.</li>
+        <li><strong>TipoReporteID:</strong> Tipo de reporte generado (clave foránea).</li>
+        <li><strong>Contenido:</strong> Información detallada del reporte.</li>
+    </ul>
+
+    <h1>Relaciones entre Tablas</h1>
+    <ul>
+        <li><strong>Cerdos y MovimientosInventario:</strong> Relación uno a muchos; un cerdo puede tener múltiples movimientos.</li>
+        <li><strong>TiposOperacion y MovimientosInventario:</strong> Relación uno a muchos; un tipo de operación puede asociarse a múltiples movimientos.</li>
+        <li><strong>Cerdos y Reportes:</strong> Relación uno a muchos; un cerdo puede tener múltiples reportes.</li>
+        <li><strong>TiposReporte y Reportes:</strong> Relación uno a muchos; un tipo de reporte puede asociarse a múltiples reportes.</li>
+    </ul>
+
 
 
     <h1>Funcionalidades del Usuario del subsistema</h1>
 
     <h2>Funcionalidades del dueño </h2>
-    <ul>
-        <li><strong>Control del Inventario:</strong> Permite al dueño mantener un registro detallado de todos los cerdos, incluyendo su peso, edad y estado. Esto es fundamental para una gestión efectiva de la granja.</li>
-        <li><strong>Generación de Reportes:</strong> Facilita la creación de reportes sobre la salud, crecimiento y movimientos de los cerdos. Esta funcionalidad es clave para la planificación y evaluación del desempeño de la granja.</li>
-        <li><strong>Gestión de Razas y Etapas de Crecimiento:</strong> Permite al dueño manejar diferentes razas y sus respectivas etapas de crecimiento. Esto asegura que se brinde la atención adecuada a cada grupo, optimizando el manejo de los cerdos.</li>
-        <li><strong>Registro de Operaciones:</strong> Permite llevar un control preciso de las transacciones y movimientos (compras, ventas, transferencias) relacionados con los cerdos. Esta funcionalidad es crucial para mantener la transparencia y la eficiencia en la gestión del negocio.</li>
-    </ul>
+    <p><b>Requerimientos del Usuario:</b> La tabla Cerdos, con su estructura de campos, permite a los usuarios registrar y gestionar la información de cada cerdo de manera efectiva. Campos como Raza, Peso y Estado facilitan el seguimiento del crecimiento y salud del inventario. La relación entre Cerdos y MovimientosInventario permite al usuario consultar un historial completo de
+         las transacciones realizadas, asegurando un control adecuado del inventario. Además, la tabla Reportes brinda al usuario la capacidad de generar informes sobre el estado de los cerdos y sus operaciones, proporcionando información valiosa para la toma de decisiones informadas y la optimización de la gestión de la granja.</p>
 
+         <h1>Organización y Claridad de los Datos (1NF, 2NF, 3NF)</h1>
 
+         <p><b>Primera Forma Normal (1NF):</b> La base de datos cumple con la 1NF al asegurar que todos los atributos contienen valores atómicos. Cada campo en las tablas almacena un único valor, lo que permite eliminar la duplicación de datos. Por ejemplo, en la tabla <strong>Cerdos</strong>, cada cerdo tiene un identificador único y atributos como Raza, Peso y Fecha de Nacimiento, facilitando la gestión y consulta de la información.</p>
+         
+         <p><b>Segunda Forma Normal (2NF):</b> La base de datos está en 2NF, ya que todos los atributos no clave dependen completamente de la clave primaria. En la tabla <strong>MovimientosInventario</strong>, por ejemplo, cada registro está asociado a un cerdo específico a través de <strong>CerdoID</strong>, y todos los demás campos dependen únicamente de este identificador. Esto evita dependencias parciales y asegura que la información sea coherente y fácil de actualizar.</p>
+         
+         <p><b>Tercera Forma Normal (3NF):</b> La base de datos cumple con la 3NF al eliminar las dependencias transitivas. En la tabla <strong>Reportes</strong>, los atributos como FechaGeneracion y Contenido dependen únicamente del <strong>ReporteID</strong>, sin que otros atributos no clave influyan en ellos. Esto garantiza que los datos se mantengan organizados y que cualquier cambio en un atributo no afecte a otros, mejorando la integridad de los datos.</p>
+
+    <h2>Código SQL para Crear Tablas</h2>
+
+    <pre>
+        Create database InventarioCerdos
+use InventarioCerdos
+
+-- Tabla: Razas
+CREATE TABLE Razas (
+  RazaID INT PRIMARY KEY,
+  Nombre VARCHAR(50),
+
+);
+
+-- Tabla: EtapasCrecimiento
+CREATE TABLE EtapasCrecimiento (
+  EtapaCrecimientoID INT PRIMARY KEY,
+  Nombre VARCHAR(50),
+  Descripcion VARCHAR(200)
+);
+
+-- Tabla: Cerdos
+CREATE TABLE Cerdos (
+  CerdoID INT PRIMARY KEY,
+  RazaID INT FOREIGN KEY REFERENCES Razas(RazaID),
+  Peso DECIMAL(10,2),
+  FechaNacimiento DATE,
+  EtapaCrecimientoID INT FOREIGN KEY REFERENCES EtapasCrecimiento(EtapaCrecimientoID),
+  Estado VARCHAR(50)
+);
+
+-- Tabla: TiposOperacion
+CREATE TABLE TiposOperacion (
+  TipoOperacionID INT PRIMARY KEY,
+  Nombre VARCHAR(50)
+);
+
+-- Tabla: MovimientosInventario
+CREATE TABLE MovimientosInventario (
+  MovimientoID INT PRIMARY KEY,
+  CerdoID INT FOREIGN KEY REFERENCES Cerdos(CerdoID),
+  FechaHora DATETIME,
+  TipoOperacionID INT FOREIGN KEY REFERENCES TiposOperacion(TipoOperacionID),
+  CantidadAfectada INT,
+  Descripcion VARCHAR(200)
+);
+
+-- Tabla: TiposReporte
+CREATE TABLE TiposReporte (
+  TipoReporteID INT PRIMARY KEY,
+  Nombre VARCHAR(50),
+  Descripcion VARCHAR(200)
+);
+
+-- Tabla: Reportes
+CREATE TABLE Reportes (
+  ReporteID INT PRIMARY KEY,
+  CerdoID INT FOREIGN KEY REFERENCES Cerdos(CerdoID),
+  FechaGeneracion DATETIME,
+  TipoReporteID INT FOREIGN KEY REFERENCES TiposReporte(TipoReporteID),
+  Contenido VARBINARY(MAX)
+);
+
+    </pre>
+
+    <h2>Código SQL para los registros en las Tablas</h2>
+
+    <pre>
+        INSERT INTO Cerdos (CerdoID, Raza, Peso, FechaNacimiento, EtapaCrecimiento, Estado) VALUES
+        (1, 'Yorkshire', 25.00, '2023-01-15', 'Lechón', 'Saludable'),
+        (2, 'Duroc', 50.50, '2022-06-20', 'Crecimiento', 'Saludable'),
+        (3, 'Berkshire', 70.30, '2022-02-10', 'Engorde', 'Saludable'),
+        (4, 'Landrace', 90.00, '2021-11-05', 'Adulto', 'Saludable'),
+        (5, 'Hampshire', 60.75, '2023-03-12', 'Lechón', 'Saludable');
+        
+        INSERT INTO TiposOperacion (TipoOperacionID, Nombre) VALUES
+        (1, 'Ingreso'),
+        (2, 'Salida');
+        
+        INSERT INTO MovimientosInventario (MovimientoID, CerdoID, FechaHora, TipoOperacionID, CantidadAfectada, Descripcion) VALUES
+        (1, 1, '2023-01-20 10:00:00', 1, 1, 'Ingreso de lechón.'),
+        (2, 2, '2023-06-25 12:30:00', 2, 2, 'Salida para venta.'),
+        (3, 3, '2023-05-15 09:45:00', 1, 1, 'Ingreso de cerdo adulto.'),
+        (4, 4, '2023-09-10 14:00:00', 2, 1, 'Salida para sacrificio.'),
+        (5, 5, '2023-03-15 11:30:00', 1, 1, 'Ingreso de lechón.');
+        
+        INSERT INTO TiposReporte (TipoReporteID, Nombre) VALUES
+        (1, 'Reporte por Periodo de Tiempo'),
+        (2, 'Reporte por Tamaño'),
+        (3, 'Reporte por Raza');
+        
+        INSERT INTO Reportes (ReporteID, CerdoID, FechaGeneracion, TipoReporteID, Contenido) VALUES
+        (1, 1, '2024-01-15', 1, 'Reporte generado sobre cerdos de 2023. Total: 50 cerdos.'),
+        (2, 2, '2024-01-20', 2, 'Reporte de tamaño de cerdos. Total de pequeños: 15, medianos: 25, grandes: 10.'),
+        (3, 3, '2024-01-25', 3, 'Reporte por raza. Total de Yorkshire: 20, Duroc: 15, Berkshire: 10.'),
+        (4, 4, '2024-02-01', 1, 'Reporte generado sobre cerdos de enero 2024. Total: 30 cerdos.'),
+        (5, 5, '2024-02-10', 2, 'Reporte de tamaño de cerdos en febrero. Total de pequeños: 5, medianos: 20, grandes: 5.');</pre>
 </body>
 </html>
