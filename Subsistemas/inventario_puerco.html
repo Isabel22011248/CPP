@@ -3,91 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inventario de Puercos</title>
+	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <ul>
-        <li><a href="./../index.html">[Principal]</a></li>
-    </ul>
 
-    <h1>Invetario de Puercos</h1>
-    <p>Este subsistema está diseñado para facilitar la gestión del inventario de cerdos, 
-        proporcionando al dueño una serie de funcionalidades que permiten una administración 
-        eficiente y efectiva de su granja.</p>
+    <header>Inventario de Puercos</header>
 
-    <h1>Usuario del subsistema</h1>
-    <ul>
-        <li>Dueño</li>
-    </ul>
-   
-  <h1>Requerimientos por usuario</h1>
+    <nav>
+        <ul>
+            <li><a href="./../index.html">Principal</a></li>
+            <li><a href="./../dbase/dbaseinfo.html">Diseño de la base de datos</a></li>
+        </ul>
+    </nav>
 
-  <h2>Requerimientos del dueño</h2></h2>
+    <main>
+        <h1>Acerca del Inventario</h1>
+        <p>
+            Este subsistema está diseñado para facilitar la gestión del inventario de cerdos, 
+            proporcionando al dueño una serie de funcionalidades que permiten una administración 
+            eficiente y efectiva de su granja.
+        </p>
 
-  <h3>El dueño debe ser capaz de:</h3>
-    	<ol>
-        	<li>
-            	<strong>Visualizar el Inventario Actual: Esta función permite
-                     ver una lista completa de todos los cerdos en el inventario, con información detallada
-                     sobre los siguientes datos: </strong>
-            	<ul>
-                	<li>ID de cerdo</li>
-                	<li>Raza</li>
-                	<li>Peso</li>
-                	<li>Fecha de nacimiento</li>
-                	<li>Etapa de crecimiento</li>
-            	</ul>
-        	</li>
-        	<li>
-            	<strong>Agregar Nuevos Cerdos:Función para incluir nuevos cerdos al inventario con los siguientes datos: </strong>
-       	     <ul>
-                	<li>ID de cerdo</li>
-                	<li>Raza</li>
-                	<li>Peso</li>
-                	<li>Fecha de nacimiento</li>
-                	<li>Etapa de crecimiento</li>
-            	</ul>
-        	</li>
-        	<li>
-            	<strong>Editar Cerdos Existentes: Permite editar la información de los cerdos ya registrados.</strong>
-            	<ul>
-                	<li>ID de cerdo</li>
-                	<li>Raza</li>
-                	<li>Peso</li>
-                	<li>Fecha de nacimiento</li>
-                	<li>Etapa de crecimiento</li>
-            	</ul>
-        	</li>
-        	<li>
-            	<strong>Eliminar Cerdos</strong>
-            	<ul>
-                	<li>Opción para eliminar cerdos del inventario, con confirmación para evitar errores.</li>
-            	</ul>
-        	</li>
-        	<li>
-            	<strong>Generar Reportes:crear informes sobre el inventario de cerdos  </strong>
-            	<ul>
-                	<li>Por periodo de tiempo</li>
-					<li>Por tamaño</li>
-					<li>Por raza</li>
-   	         	</ul>
-        	</li>
-        	<li>
-            	<strong>Registrar los movimientos de Inventario</strong>
-            	<ul>
-                	<li>Registro de todas las entradas y salidas, incluyendo:</li>
-                	 <ul>
-                        <li>Fecha y hora</li>
-                	    <li>Tipo de operación</li>
-                	    <li>Cantidad afectada</li>
-                     </ul>
-            	</ul>
-        	</li>
-    	</ol>
+        <h1>Usuario del Subsistema</h1>
+        <ul>
+            <li>Dueño</li>
+        </ul>
 
-        <h1>Responsable del subsistema</h1>
-        <P>Maria Isabel Olguin Zenil- 22011248@itsoeh.edu.mx</P>
+        <h1>Requerimientos por Usuario</h1>
 
+        <h2>Requerimientos del Dueño</h2>
+        <h3>El dueño debe ser capaz de:</h3>
+        <ol>
+            <li>
+                <strong>Visualizar el Inventario Actual:</strong> 
+                Ver una lista completa de todos los cerdos en el inventario, con información sobre:
+                <ul>
+                    <li>ID de cerdo</li>
+                    <li>Raza</li>
+                    <li>Peso</li>
+                    <li>Fecha de nacimiento</li>
+                    <li>Etapa de crecimiento</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Agregar Nuevos Cerdos:</strong> 
+                Incluir nuevos cerdos con los siguientes datos:
+                <ul>
+                    <li>ID de cerdo</li>
+                    <li>Raza</li>
+                    <li>Peso</li>
+                    <li>Fecha de nacimiento</li>
+                    <li>Etapa de crecimiento</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Editar Cerdos Existentes:</strong> 
+                Modificar la información de cerdos ya registrados.
+                <ul>
+                    <li>ID de cerdo</li>
+                    <li>Raza</li>
+                    <li>Peso</li>
+                    <li>Fecha de nacimiento</li>
+                    <li>Etapa de crecimiento</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Eliminar Cerdos:</strong> 
+                Eliminar cerdos con confirmación para evitar errores.
+            </li>
+            <li>
+                <strong>Generar Reportes:</strong> 
+                Crear informes por:
+                <ul>
+                    <li>Periodo de tiempo</li>
+                    <li>Tamaño</li>
+                    <li>Raza</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Registrar Movimientos del Inventario:</strong> 
+                Registrar entradas y salidas, incluyendo:
+                <ul>
+                    <li>Fecha y hora</li>
+                    <li>Tipo de operación</li>
+                    <li>Cantidad afectada</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h1>Responsable del Subsistema</h1>
+        <p>Maria Isabel Olguin Zenil - 22011248@itsoeh.edu.mx</p>
+    </main>
 
 </body>
 </html>

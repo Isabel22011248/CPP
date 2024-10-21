@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de datos</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="./../Subsistemas/inventario_puerco.html">Inventario de Puercos</a></li>
+        </ul>
+    </nav>
+
+    <img src="./../imagenes/Diagrama de DB.png" alt="Diagrama de Inventario de Puercos"width="600">
+
+    <H1>Diseño de la base de datos del subsistema</H1>
+
+    <p>
+        La base de datos se compone de varias tablas que representan las entidades clave en la gestión del 
+        inventario de cerdos. Estas tablas son:
+    </p>
+    <ul>
+        <li>Razas</li>
+        <li>EtapasCrecimiento</li>
+        <li>Cerdos</li>
+        <li>TiposOperacion</li>
+        <li>MovimientosInventario</li>
+        <li>TiposReporte</li>
+        <li>Reportes</li>
+    </ul>
+
+    <h2>Tablas y Campos</h2>
+    <p>
+        <strong>Razas:</strong> Esta tabla contiene información sobre las razas de los cerdos. Los campos 
+        permiten registrar el nombre de la raza, lo que es esencial para clasificar y gestionar la diversidad genética en el inventario.
+    </p>
+    <p>
+        <strong>EtapasCrecimiento:</strong> Almacena las diferentes etapas de crecimiento de los cerdos,
+         incluyendo un nombre y descripción. Esto es crucial para entender las necesidades y características 
+         de los cerdos en cada fase de su vida.
+    </p>
+    <p>
+        <strong>Cerdos:</strong> La tabla principal que registra la información individual de cada cerdo, 
+        incluyendo su peso, fecha de nacimiento, raza y etapa de crecimiento. Las relaciones con las tablas de Razas y
+         EtapasCrecimiento aseguran una integridad referencial, permitiendo un seguimiento adecuado de cada animal.
+    </p>
+    <p>
+        <strong>TiposOperacion:</strong> Esta tabla define los diferentes tipos de operaciones que pueden realizarse 
+        en el inventario, como entradas y salidas. Esto facilita la categorización y gestión de los movimientos de los cerdos.
+    </p>
+    <p>
+        <strong>MovimientosInventario:</strong> Registra cada movimiento de los cerdos, incluyendo la fecha y tipo de 
+        operación. Este seguimiento es vital para mantener un control preciso del inventario y para la toma de decisiones operativas.
+    </p>
+    <p>
+        <strong>TiposReporte:</strong> Almacena los diferentes tipos de reportes que se pueden generar, permitiendo una 
+        fácil clasificación y generación de informes sobre el estado del inventario.
+    </p>
+    <p>
+        <strong>Reportes:</strong> Esta tabla vincula reportes específicos a cerdos individuales, permitiendo un análisis 
+        detallado de cada animal y su rendimiento.
+    </p>
+
+    <h2>Relaciones</h2>
+    <p>
+        Las relaciones entre las tablas son fundamentales para mantener la integridad de los datos:
+    </p>
+    <ul>
+        <li><strong>Razas y Cerdos:</strong> Se establece una relación de uno a muchos, donde cada raza puede estar asociada a múltiples cerdos.</li>
+        <li><strong>EtapasCrecimiento y Cerdos:</strong> Similarmente, cada cerdo está vinculado a una etapa de crecimiento específica, lo que permite un seguimiento adecuado del desarrollo del animal.</li>
+        <li><strong>Cerdos y MovimientosInventario:</strong> Cada movimiento registrado en el inventario se asocia con un cerdo específico, garantizando un control exhaustivo de los cambios en el inventario.</li>
+        <li><strong>TiposOperacion y MovimientosInventario:</strong> Los movimientos se clasifican por tipo de operación, lo que permite una gestión más organizada.</li>
+        <li><strong>Cerdos y Reportes:</strong> Cada reporte está vinculado a un cerdo, facilitando un análisis detallado del rendimiento y estado de cada animal.</li>
+    </ul>
+
+
+    <h1>Funcionalidades del Usuario del subsistema</h1>
+
+    <h2>Funcionalidades del dueño </h2>
+    <ul>
+        <li><strong>Control del Inventario:</strong> Permite al dueño mantener un registro detallado de todos los cerdos, incluyendo su peso, edad y estado. Esto es fundamental para una gestión efectiva de la granja.</li>
+        <li><strong>Generación de Reportes:</strong> Facilita la creación de reportes sobre la salud, crecimiento y movimientos de los cerdos. Esta funcionalidad es clave para la planificación y evaluación del desempeño de la granja.</li>
+        <li><strong>Gestión de Razas y Etapas de Crecimiento:</strong> Permite al dueño manejar diferentes razas y sus respectivas etapas de crecimiento. Esto asegura que se brinde la atención adecuada a cada grupo, optimizando el manejo de los cerdos.</li>
+        <li><strong>Registro de Operaciones:</strong> Permite llevar un control preciso de las transacciones y movimientos (compras, ventas, transferencias) relacionados con los cerdos. Esta funcionalidad es crucial para mantener la transparencia y la eficiencia en la gestión del negocio.</li>
+    </ul>
+
+
+</body>
+</html>
