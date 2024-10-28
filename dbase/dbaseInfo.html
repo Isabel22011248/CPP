@@ -14,67 +14,56 @@
     </nav>
     <H1>Diseño de la base de datos del subsistema</H1>
 
-    <img src="./../imagenes/Base de datos.png" alt="Diagrama de Inventario de Puercos"width="600">
+    <img src="./../imagenes/Database.jpg" alt="Diagrama de Inventario de Puercos"width="600">
 
     <h2>Descripción de la Arquitectura de la Base de Datos</h2>
-    <p>
-        La base de datos del sistema se compone de cinco tablas principales, 
-        diseñadas para almacenar información relacionada y garantizar la integridad de los datos.
-    </p>
 
-    <h2> Tabla: Cerdos</h2>
-    <p><strong>Descripción:</strong> Almacena información detallada sobre cada cerdo en el inventario.</p>
+    <p>La arquitectura de la base de datos está compuesta por cuatro tablas principales que interactúan entre sí, cada una responsable de almacenar información específica y relacionada. A continuación, se describe cada tabla, su propósito y su función en el sistema:</p>
+    
+    <h2>1. Tabla: Cerdos</h2>
+    <p><strong>Propósito:</strong> Almacena información sobre cada cerdo en el inventario.</p>
     <ul>
-        <li><strong>CerdoID:</strong> Identificador único para cada cerdo (clave primaria).</li>
-        <li><strong>Raza:</strong> Nombre de la raza del cerdo.</li>
-        <li><strong>Peso:</strong> Peso actual del cerdo.</li>
+        <li><strong>IDCerdo:</strong> Identificador único del cerdo (clave primaria).</li>
+        <li><strong>Raza:</strong> Raza del cerdo.</li>
+        <li><strong>Peso:</strong> Peso del cerdo en kilogramos.</li>
         <li><strong>FechaNacimiento:</strong> Fecha de nacimiento del cerdo.</li>
-        <li><strong>EtapaCrecimiento:</strong> Etapa actual (Lechón, Crecimiento, Engorde, Adulto).</li>
-        <li><strong>Estado:</strong> Estado general del cerdo (Saludable, Enfermo, etc.).</li>
+        <li><strong>EtapaCrecimiento:</strong> Etapa en que se encuentra el cerdo (Lechón, Engorde, etc.).</li>
+        <li><strong>Sexo:</strong> Género del cerdo.</li>
+        <li><strong>EstadoSalud:</strong> Estado de salud del cerdo (Saludable, Enfermo, etc.).</li>
+        <li><strong>Observaciones:</strong> Notas adicionales sobre el cerdo.</li>
     </ul>
-
-    <h2> Tabla: TiposOperacion</h2>
-    <p><strong>Descripción:</strong> Define los diferentes tipos de operaciones que se realizan sobre los cerdos.</p>
+    
+    <h2>2. Tabla: TiposOperacion</h2>
+    <p><strong>Propósito:</strong> Define los tipos de operaciones que se pueden realizar con los cerdos, como entradas y salidas.</p>
     <ul>
-        <li><strong>TipoOperacionID:</strong> Identificador único (clave primaria).</li>
-        <li><strong>Nombre:</strong> Descripción del tipo de operación (Ingreso, Salida, etc.).</li>
+        <li><strong>IDTipoOperacion:</strong> Identificador único del tipo de operación (clave primaria).</li>
+        <li><strong>Descripcion:</strong> Descripción del tipo de operación (por ejemplo, "Entrada", "Salida").</li>
+        <li><strong>FechaRegistro:</strong> Fecha en que se registró el tipo de operación, con un valor por defecto que es la fecha actual.</li>
     </ul>
-
-    <h2> Tabla: MovimientosInventario</h2>
-    <p><strong>Descripción:</strong> Registra todas las transacciones relacionadas con los cerdos.</p>
+    
+    <h2>3. Tabla: Movimientos</h2>
+    <p><strong>Propósito:</strong> Registra todos los movimientos de inventario relacionados con los cerdos.</p>
     <ul>
-        <li><strong>MovimientoID:</strong> Identificador único (clave primaria).</li>
-        <li><strong>CerdoID:</strong> Identificador del cerdo asociado (clave foránea).</li>
+        <li><strong>IDMovimiento:</strong> Identificador único del movimiento (clave primaria).</li>
         <li><strong>FechaHora:</strong> Fecha y hora del movimiento.</li>
-        <li><strong>TipoOperacionID:</strong> Tipo de operación (clave foránea).</li>
-        <li><strong>CantidadAfectada:</strong> Cantidad de cerdos involucrados.</li>
-        <li><strong>Descripcion:</strong> Detalles adicionales sobre el movimiento.</li>
+        <li><strong>TipoOperacionID:</strong> Referencia al IDTipoOperacion para identificar qué tipo de operación se realiza (clave foránea).</li>
+        <li><strong>Observaciones:</strong> Notas adicionales sobre el movimiento.</li>
     </ul>
-
-    <h2> Tabla: TiposReporte</h2>
-    <p><strong>Descripción:</strong> Define los diferentes tipos de reportes generables.</p>
+    
+    <h2>4. Tabla: CerdoMovimientos</h2>
+    <p><strong>Propósito:</strong> Actúa como tabla puente para establecer una relación muchos a muchos entre los cerdos y sus movimientos.</p>
     <ul>
-        <li><strong>TipoReporteID:</strong> Identificador único (clave primaria).</li>
-        <li><strong>Nombre:</strong> Nombre del tipo de reporte.</li>
-        <li><strong>Descripcion:</strong> Descripción del contenido del reporte.</li>
+        <li><strong>IDCerdo:</strong> Referencia al cerdo involucrado en el movimiento (clave foránea).</li>
+        <li><strong>IDMovimiento:</strong> Referencia al movimiento asociado al cerdo (clave foránea).</li>
+        <li><strong>FechaRegistro:</strong> Fecha en que se registró la relación, con un valor por defecto que es la fecha actual.</li>
     </ul>
-
-    <h2> Tabla: Reportes</h2>
-    <p><strong>Descripción:</strong> Almacena informes sobre los cerdos y sus operaciones.</p>
+    
+    <h2>Relaciones entre Tablas</h2>
+    <p>La arquitectura de tu base de datos está diseñada para facilitar la integridad de los datos y la recuperación eficiente de la información:</p>
     <ul>
-        <li><strong>ReporteID:</strong> Identificador único (clave primaria).</li>
-        <li><strong>CerdoID:</strong> Identificador del cerdo asociado (clave foránea).</li>
-        <li><strong>FechaGeneracion:</strong> Fecha en que se generó el reporte.</li>
-        <li><strong>TipoReporteID:</strong> Tipo de reporte generado (clave foránea).</li>
-        <li><strong>Contenido:</strong> Información detallada del reporte.</li>
-    </ul>
-
-    <h1>Relaciones entre Tablas</h1>
-    <ul>
-        <li><strong>Cerdos y MovimientosInventario:</strong> Relación uno a muchos; un cerdo puede tener múltiples movimientos.</li>
-        <li><strong>TiposOperacion y MovimientosInventario:</strong> Relación uno a muchos; un tipo de operación puede asociarse a múltiples movimientos.</li>
-        <li><strong>Cerdos y Reportes:</strong> Relación uno a muchos; un cerdo puede tener múltiples reportes.</li>
-        <li><strong>TiposReporte y Reportes:</strong> Relación uno a muchos; un tipo de reporte puede asociarse a múltiples reportes.</li>
+        <li><strong>Cerdos ↔ CerdoMovimientos:</strong> Un cerdo puede estar asociado con múltiples movimientos a través de la tabla puente.</li>
+        <li><strong>Movimientos ↔ CerdoMovimientos:</strong> Un movimiento puede involucrar múltiples cerdos, permitiendo una relación flexible y escalable.</li>
+        <li><strong>Movimientos ↔ TiposOperacion:</strong> Cada movimiento está asociado con un tipo de operación específica, lo que permite categorizar y gestionar los movimientos de manera efectiva.</li>
     </ul>
 
 
@@ -82,16 +71,45 @@
     <h1>Funcionalidades del Usuario del subsistema</h1>
 
     <h2>Funcionalidades del dueño </h2>
-    <p><b>Requerimientos del Usuario:</b> La tabla Cerdos, con su estructura de campos, permite a los usuarios registrar y gestionar la información de cada cerdo de manera efectiva. Campos como Raza, Peso y Estado facilitan el seguimiento del crecimiento y salud del inventario. La relación entre Cerdos y MovimientosInventario permite al usuario consultar un historial completo de
-         las transacciones realizadas, asegurando un control adecuado del inventario. Además, la tabla Reportes brinda al usuario la capacidad de generar informes sobre el estado de los cerdos y sus operaciones, proporcionando información valiosa para la toma de decisiones informadas y la optimización de la gestión de la granja.</p>
+    <p>La tabla <strong>Cerdos</strong>, con su estructura de campos, permite al dueño registrar y gestionar la información de cada cerdo de manera eficiente.
+     Los campos como raza, peso y estado de salud facilitan un seguimiento detallado del inventario.</p>
 
-         <h1>Organización y Claridad de los Datos (1NF, 2NF, 3NF)</h1>
+      <p>La tabla <strong>TiposOperacion</strong> proporciona la flexibilidad necesaria para definir diferentes tipos de movimientos, como entradas y salidas de cerdos.
+        Esto permite al dueño clasificar y gestionar las transacciones de forma efectiva, lo cual es esencial para un manejo adecuado del negocio.</p>
 
-         <p><b>Primera Forma Normal (1NF):</b> La base de datos cumple con la 1NF al asegurar que todos los atributos contienen valores atómicos. Cada campo en las tablas almacena un único valor, lo que permite eliminar la duplicación de datos. Por ejemplo, en la tabla <strong>Cerdos</strong>, cada cerdo tiene un identificador único y atributos como Raza, Peso y Fecha de Nacimiento, facilitando la gestión y consulta de la información.</p>
-         
-         <p><b>Segunda Forma Normal (2NF):</b> La base de datos está en 2NF, ya que todos los atributos no clave dependen completamente de la clave primaria. En la tabla <strong>MovimientosInventario</strong>, por ejemplo, cada registro está asociado a un cerdo específico a través de <strong>CerdoID</strong>, y todos los demás campos dependen únicamente de este identificador. Esto evita dependencias parciales y asegura que la información sea coherente y fácil de actualizar.</p>
-         
-         <p><b>Tercera Forma Normal (3NF):</b> La base de datos cumple con la 3NF al eliminar las dependencias transitivas. En la tabla <strong>Reportes</strong>, los atributos como FechaGeneracion y Contenido dependen únicamente del <strong>ReporteID</strong>, sin que otros atributos no clave influyan en ellos. Esto garantiza que los datos se mantengan organizados y que cualquier cambio en un atributo no afecte a otros, mejorando la integridad de los datos.</p>
+      <p>La tabla <strong>Movimientos</strong> registra todas las operaciones relacionadas con los cerdos, permitiendo al dueño llevar un control exhaustivo de cada
+   transacción.</p>
+
+      <p>La tabla <strong>CerdoMovimientos</strong> actúa como una tabla puente, permitiendo al dueño asociar múltiples cerdos con diversos movimientos. Esto es crucial en un entorno
+   donde los cerdos pueden ser parte de diferentes transacciones a lo largo del tiempo, asegurando una gestión integral del inventario.</p>
+
+   <h1>Organización y Claridad de los Datos</h1>
+
+   <h2>1. Primera Forma Normal (1NF)</h2>
+   <p>La Primera Forma Normal se asegura de que cada columna de una tabla contenga valores atómicos, es decir, que no haya grupos repetitivos o datos compuestos. En tu diseño:</p>
+   <ul>
+       <li><strong>Tabla Cerdos:</strong> Cada columna (Raza, Peso, FechaNacimiento, etc.) tiene un solo valor por cerdo, cumpliendo con la 1NF.</li>
+       <li><strong>Tabla TiposOperacion:</strong> Cada operación está bien definida y no contiene valores repetitivos.</li>
+       <li><strong>Tabla Movimientos:</strong> Cada movimiento tiene un único registro por transacción, lo que asegura que cada campo almacena información atómica.</li>
+       <li><strong>Tabla CerdoMovimientos:</strong> Cada entrada relaciona un solo cerdo con un solo movimiento, sin datos compuestos.</li>
+   </ul>
+   
+   <h2>2. Segunda Forma Normal (2NF)</h2>
+   <p>La Segunda Forma Normal se enfoca en eliminar dependencias parciales; es decir, cada atributo no clave en una tabla debe depender de la clave primaria completa. En tu diseño:</p>
+   <ul>
+       <li><strong>Tabla Cerdos:</strong> Todos los atributos dependen únicamente del <code>IDCerdo</code>, que es la clave primaria.</li>
+       <li><strong>Tabla TiposOperacion:</strong> Todos los campos dependen del <code>IDTipoOperacion</code>, evitando dependencias parciales.</li>
+       <li><strong>Tabla CerdoMovimientos:</strong> La relación entre <code>IDCerdo</code> y <code>IDMovimiento</code> asegura que cada campo depende de la clave compuesta.</li>
+   </ul>
+   
+   <h2>3. Tercera Forma Normal (3NF)</h2>
+   <p>La Tercera Forma Normal se asegura de que no existan dependencias transitivas; es decir, que los atributos no clave no dependan de otros atributos no clave. En tu diseño:</p>
+   <ul>
+       <li><strong>Tabla Cerdos:</strong> No hay atributos que dependan de otros atributos no clave. Cada columna se relaciona directamente con el <code>IDCerdo</code>.</li>
+       <li><strong>Tabla TiposOperacion:</strong> No hay dependencias transitivas; todos los campos dependen únicamente del <code>IDTipoOperacion</code>.</li>
+       <li><strong>Tabla Movimientos:</strong> Todos los atributos dependen directamente de <code>IDMovimiento</code>, sin depender de otros atributos no clave.</li>
+       <li><strong>Tabla CerdoMovimientos:</strong> La relación es directa y no hay atributos que dependan de otros atributos no clave.</li>
+   </ul>
 
     <h2>Código SQL para Crear Tablas</h2>
 
@@ -99,60 +117,46 @@
         Create database InventarioCerdos
 use InventarioCerdos
 
--- Tabla: Razas
-CREATE TABLE Razas (
-  RazaID INT PRIMARY KEY,
-  Nombre VARCHAR(50),
-
-);
-
--- Tabla: EtapasCrecimiento
-CREATE TABLE EtapasCrecimiento (
-  EtapaCrecimientoID INT PRIMARY KEY,
-  Nombre VARCHAR(50),
-  Descripcion VARCHAR(200)
-);
-
--- Tabla: Cerdos
+-- 1. Tabla: Cerdos
 CREATE TABLE Cerdos (
-  CerdoID INT PRIMARY KEY,
-  RazaID INT FOREIGN KEY REFERENCES Razas(RazaID),
-  Peso DECIMAL(10,2),
-  FechaNacimiento DATE,
-  EtapaCrecimientoID INT FOREIGN KEY REFERENCES EtapasCrecimiento(EtapaCrecimientoID),
-  Estado VARCHAR(50)
+    IDCerdo INT PRIMARY KEY IDENTITY(1,1),
+    Raza VARCHAR(50) NOT NULL,
+    Peso DECIMAL(5,2) NOT NULL,
+    FechaNacimiento DATE NOT NULL,
+    EtapaCrecimiento VARCHAR(50) NOT NULL,
+    Sexo VARCHAR(10) NULL,
+    EstadoSalud VARCHAR(50) NULL,
+    Observaciones TEXT NULL
 );
 
--- Tabla: TiposOperacion
+-- 2. Tabla: TiposOperacion
 CREATE TABLE TiposOperacion (
-  TipoOperacionID INT PRIMARY KEY,
-  Nombre VARCHAR(50)
+    IDTipoOperacion INT PRIMARY KEY IDENTITY(1,1),
+    Descripcion VARCHAR(50) NOT NULL,
+    FechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
 );
 
--- Tabla: MovimientosInventario
-CREATE TABLE MovimientosInventario (
-  MovimientoID INT PRIMARY KEY,
-  CerdoID INT FOREIGN KEY REFERENCES Cerdos(CerdoID),
-  FechaHora DATETIME,
-  TipoOperacionID INT FOREIGN KEY REFERENCES TiposOperacion(TipoOperacionID),
-  CantidadAfectada INT,
-  Descripcion VARCHAR(200)
+-- 3. Tabla: Movimientos
+CREATE TABLE Movimientos (
+    IDMovimiento INT PRIMARY KEY IDENTITY(1,1),
+    FechaHora DATETIME NOT NULL,
+    TipoOperacionID INT FOREIGN KEY REFERENCES TiposOperacion(IDTipoOperacion),
+    Cantidad INT NOT NULL,
+    CostoTotal DECIMAL(10,2) NULL,
+    ValorUnitario DECIMAL(10,2) NULL,
+    EstadoMovimiento VARCHAR(20) NULL,
+    Motivo VARCHAR(100) NULL,
+    Observaciones TEXT NULL
 );
 
--- Tabla: TiposReporte
-CREATE TABLE TiposReporte (
-  TipoReporteID INT PRIMARY KEY,
-  Nombre VARCHAR(50),
-  Descripcion VARCHAR(200)
-);
-
--- Tabla: Reportes
-CREATE TABLE Reportes (
-  ReporteID INT PRIMARY KEY,
-  CerdoID INT FOREIGN KEY REFERENCES Cerdos(CerdoID),
-  FechaGeneracion DATETIME,
-  TipoReporteID INT FOREIGN KEY REFERENCES TiposReporte(TipoReporteID),
-  Contenido VARBINARY(MAX)
+-- 4. Tabla: CerdoMovimientos
+CREATE TABLE CerdoMovimientos (
+    IDCerdo INT,
+    IDMovimiento INT,
+    FechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    PRIMARY KEY (IDCerdo, IDMovimiento),
+    FOREIGN KEY (IDCerdo) REFERENCES Cerdos(IDCerdo),
+    FOREIGN KEY (IDMovimiento) REFERENCES Movimientos(IDMovimiento)
 );
 
     </pre>
@@ -160,34 +164,34 @@ CREATE TABLE Reportes (
     <h2>Código SQL para los registros en las Tablas</h2>
 
     <pre>
-        INSERT INTO Cerdos (CerdoID, Raza, Peso, FechaNacimiento, EtapaCrecimiento, Estado) VALUES
-        (1, 'Yorkshire', 25.00, '2023-01-15', 'Lechón', 'Saludable'),
-        (2, 'Duroc', 50.50, '2022-06-20', 'Crecimiento', 'Saludable'),
-        (3, 'Berkshire', 70.30, '2022-02-10', 'Engorde', 'Saludable'),
-        (4, 'Landrace', 90.00, '2021-11-05', 'Adulto', 'Saludable'),
-        (5, 'Hampshire', 60.75, '2023-03-12', 'Lechón', 'Saludable');
-        
-        INSERT INTO TiposOperacion (TipoOperacionID, Nombre) VALUES
-        (1, 'Ingreso'),
-        (2, 'Salida');
-        
-        INSERT INTO MovimientosInventario (MovimientoID, CerdoID, FechaHora, TipoOperacionID, CantidadAfectada, Descripcion) VALUES
-        (1, 1, '2023-01-20 10:00:00', 1, 1, 'Ingreso de lechón.'),
-        (2, 2, '2023-06-25 12:30:00', 2, 2, 'Salida para venta.'),
-        (3, 3, '2023-05-15 09:45:00', 1, 1, 'Ingreso de cerdo adulto.'),
-        (4, 4, '2023-09-10 14:00:00', 2, 1, 'Salida para sacrificio.'),
-        (5, 5, '2023-03-15 11:30:00', 1, 1, 'Ingreso de lechón.');
-        
-        INSERT INTO TiposReporte (TipoReporteID, Nombre) VALUES
-        (1, 'Reporte por Periodo de Tiempo'),
-        (2, 'Reporte por Tamaño'),
-        (3, 'Reporte por Raza');
-        
-        INSERT INTO Reportes (ReporteID, CerdoID, FechaGeneracion, TipoReporteID, Contenido) VALUES
-        (1, 1, '2024-01-15', 1, 'Reporte generado sobre cerdos de 2023. Total: 50 cerdos.'),
-        (2, 2, '2024-01-20', 2, 'Reporte de tamaño de cerdos. Total de pequeños: 15, medianos: 25, grandes: 10.'),
-        (3, 3, '2024-01-25', 3, 'Reporte por raza. Total de Yorkshire: 20, Duroc: 15, Berkshire: 10.'),
-        (4, 4, '2024-02-01', 1, 'Reporte generado sobre cerdos de enero 2024. Total: 30 cerdos.'),
-        (5, 5, '2024-02-10', 2, 'Reporte de tamaño de cerdos en febrero. Total de pequeños: 5, medianos: 20, grandes: 5.');</pre>
+      -- Inserción de datos en la tabla Cerdos
+      INSERT INTO Cerdos (Raza, Peso, FechaNacimiento, EtapaCrecimiento, Sexo, EstadoSalud, Observaciones) VALUES
+          ('Yorkshire', 25.00, '2023-01-15', 'Lechón', 'Macho', 'Saludable', 'Primer lechón de la camada.'),
+          ('Duroc', 50.50, '2022-06-20', 'Crecimiento', 'Hembra', 'Saludable', 'Crecimiento óptimo.'),
+          ('Berkshire', 70.30, '2022-02-10', 'Engorde', 'Macho', 'Saludable', 'Listo para sacrificio.'),
+          ('Landrace', 90.00, '2021-11-05', 'Adulto', 'Hembra', 'Saludable', 'Buena genética.'),
+          ('Hampshire', 60.75, '2023-03-12', 'Lechón', 'Macho', 'Saludable', 'Lechón con gran potencial.');
+      
+      -- Inserción de datos en la tabla TiposOperacion
+      INSERT INTO TiposOperacion (Descripcion) VALUES
+          ('Ingreso'),
+          ('Muerto'),
+          ('Salida');
+      
+      -- Inserción de datos en la tabla Movimientos
+      INSERT INTO Movimientos (FechaHora, TipoOperacionID, Observaciones) VALUES
+          ('2023-01-20 10:00:00', 1, 'Ingreso de lechón.'),
+          ('2023-06-25 12:30:00', 2, 'Salida para venta.'),
+          ('2023-05-15 09:45:00', 1, 'Ingreso de cerdo adulto.'),
+          ('2023-09-10 14:00:00', 2, 'Salida para sacrificio.'),
+          ('2023-03-15 11:30:00', 1, 'Ingreso de lechón.');
+      
+      -- Inserción de datos en la tabla CerdoMovimientos
+      INSERT INTO CerdoMovimientos (IDCerdo, IDMovimiento, FechaRegistro) VALUES
+          (1, 1, '2023-01-20 10:00:00'),
+          (2, 2, '2023-06-25 12:30:00'),
+          (3, 3, '2023-05-15 09:45:00'),
+          (4, 4, '2023-09-10 14:00:00'),
+          (5, 5, '2023-03-15 11:30:00');
 </body>
 </html>
