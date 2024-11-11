@@ -141,11 +141,6 @@ CREATE TABLE Movimientos (
     IDMovimiento INT PRIMARY KEY IDENTITY(1,1),
     FechaHora DATETIME NOT NULL,
     TipoOperacionID INT FOREIGN KEY REFERENCES TiposOperacion(IDTipoOperacion),
-    Cantidad INT NOT NULL,
-    CostoTotal DECIMAL(10,2) NULL,
-    ValorUnitario DECIMAL(10,2) NULL,
-    EstadoMovimiento VARCHAR(20) NULL,
-    Motivo VARCHAR(100) NULL,
     Observaciones TEXT NULL
 );
 
